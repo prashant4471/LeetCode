@@ -1,0 +1,44 @@
+class Solution {
+public:
+    string largestTimeFromDigits(vector<int>& A) {
+       string s="";
+    int c=2,w,x,y,z,flag=0,p,q;
+    vector<int>b;
+    sort(A.begin(),A.end());
+    for(int i=23;i>=0;i--){
+        for(int j=59;j>=0;j--){
+            p=j;
+            q=i;
+            c=2;
+            while(c--){
+                if(c==1){
+                    w=p%10;
+                    x=q%10;
+                    b.push_back(w);
+                    b.push_back(x);
+                }
+                else{
+                    y=p%10;
+                    z=q%10;
+                    b.push_back(y);
+                    b.push_back(z);
+                }
+                p/=10;
+                q/=10;
+            }
+            sort(b.begin(),b.end());
+            if(b==A){
+                flag=1;
+                break;
+            }
+            b.clear();
+        }
+        if(flag)
+        break;
+    }
+    if(flag){
+        s=std::to_string(z)+std::to_string(x)+":"+std::to_string(y)+std::to_string(w);
+    }
+    return s;
+    }
+};
